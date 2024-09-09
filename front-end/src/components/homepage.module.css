@@ -1,0 +1,36 @@
+.homepage {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+button {
+
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: linear-gradient(45deg, #ff6b6b, #f06595);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    will-change: transform, box-shadow;
+
+}
+
+button:hover {
+
+    background: linear-gradient(45deg, #f06595, #ff6b6b);
+    color: #f1f1f1;
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+
+}

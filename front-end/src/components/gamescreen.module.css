@@ -1,0 +1,23 @@
+.waldo-app {
+    position: relative;
+  }
+  
+  .image-container {
+    position: relative;
+    overflow: auto; /* Allows scrolling */
+  }
+  
+  .waldo-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .target-box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid red;
+    transform: translate(-50%, -50%); /* Centers the box around the click */
+    pointer-events: none; /* Box doesn't interfere with clicks */
+  }
+  
