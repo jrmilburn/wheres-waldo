@@ -7,6 +7,13 @@ function Cursor() {
   const [isClicking, setIsClicking] = useState(false);
   const [buttonHovered, setButtonHovered] = useState(false);
 
+  useEffect(() => {
+    fetch(`https://localhost:3000/api/maps/slopes`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+  }, [isClicking])
+
   // check if it is a touch device
   const isTouchDevice = () => {
     try {
@@ -37,6 +44,7 @@ function Cursor() {
 
   const handleMouseDown = () => {
     setIsClicking(true);
+
   };
 
   const handleMouseUp = () => {

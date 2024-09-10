@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { useState } from 'react'
 
 import GameScreen from './components/gamescreen'
 import Root from './components/root'
@@ -9,10 +10,12 @@ import Cursor from './components/cursor'
 
 function App() {
 
+  const [gameState, setGameState] = useState(false);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root />}>
-        <Route index element={<Homepage /> } />
+      <Route path="/" element={<Root gameState={gameState} handleClick={setGameState}/>}>
+        <Route index element={<Homepage handleClick={setGameState}/> } />
         <Route path="gamescreen" element={<GameScreen /> } />
       </Route>
     )

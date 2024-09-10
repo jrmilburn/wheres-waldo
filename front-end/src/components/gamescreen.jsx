@@ -20,6 +20,7 @@ export default function GameScreen() {
 
     return (
         <>
+
             <div className={styles["waldo-app"]}>
               <div className={styles["image-container"]} onClick={handleClick}>
                 <img

@@ -12,3 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Character {
+  id    String @id @default(cuid())
+  name  String
+  Minx  Int
+  Maxx  Int
+  Miny  Int
+  Maxy  Int
+  Map   Map    @relation(fields: [mapId], references: [id])
+  mapId Int
+}
+
+model Map {
+  id         Int      @id
+  name       String
+  Characters Character[]
+}
