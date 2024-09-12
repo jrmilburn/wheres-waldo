@@ -14,18 +14,38 @@ datasource db {
 }
 
 model Character {
-  id    String @id @default(cuid())
-  name  String
-  Minx  Int
-  Maxx  Int
-  Miny  Int
-  Maxy  Int
-  Map   Map    @relation(fields: [mapId], references: [id])
-  mapId Int
+  id       String @id @default(cuid())
+  name     String
+  imageUrl String
+  Minx     Int
+  Maxx     Int
+  Miny     Int
+  Maxy     Int
+  Map      Map    @relation(fields: [mapId], references: [id])
+  mapId    Int
 }
 
 model Map {
-  id         Int      @id
+  id         Int         @id
   name       String
   Characters Character[]
+  Game       Game[]
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  name     String?
+  password String
+  Game     Game[]
+}
+
+model Game {
+  id        String    @id @default(cuid())
+  startedAt DateTime 
+  endedAt   DateTime?
+  User      User      @relation(fields: [userId], references: [id])
+  userId    String
+  Map       Map       @relation(fields: [mapId], references: [id])
+  mapId     Int
 }

@@ -1,23 +1,28 @@
 import styles from './root.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useState } from 'react';
 import Characters from './characters';
+import { useEffect, useState } from 'react';
 
-export default function Root({ gameState, handleClick }) {
-    const [foundCharacters, setFoundCharacters] = useState([]);
+export default function Root({ gameState, setGameState, handleClick, foundCharacters, characters, setFoundCharacters, timer }) {
+
+    const NUM_CHARACTERS = 4;
+    const [showPopup, setShowPopup] = useState(false);
 
     const handleHomeClick = () => {
         handleClick(false);
     };
 
-    const handleCharacterFound = (character) => {
-        setFoundCharacters((prevFoundCharacters) => [...prevFoundCharacters, character]);
-    };
+    useEffect(() => {
+        if(foundCharacters.length === NUM_CHARACTERS && gameState){
+            setShowPopup(true);
+            setGameState(false);
+        }
+    }, [foundCharacters, NUM_CHARACTERS, gameState]);
 
     return (
         <>
             {gameState ? (
-                <Characters foundCharacters={foundCharacters} onCharacterFound={handleCharacterFound} />
+                <Characters foundCharacters={foundCharacters} characters={characters} />
             ) : (
                 <div className={styles["navbar"]}>
                     <ul>
@@ -30,6 +35,23 @@ export default function Root({ gameState, handleClick }) {
             <div className={styles["main"]}>
                 <Outlet />
             </div>
+
+            {showPopup && (
+            <>
+              <div className={styles["popup-overlay"]} onClick={() => setShowPopup(false)}></div>
+              <div className={styles["popup"]}>
+                <p>Congratulations! You found all the characters in {timer}s!</p>
+                <div className={styles["buttons"]}>
+                    <NavLink to='/'><button onClick={() => {
+                        setShowPopup(false);
+                        handleHomeClick();
+                        setFoundCharacters([]);
+                    }}>Close</button></NavLink>
+                    <NavLink to='/leaderboard'><button onClick={() => setShowPopup(false)}>Leaderboard</button></NavLink>
+                </div>
+              </div>
+            </>
+        )}
         </>
     );
 }

@@ -1,0 +1,39 @@
+.leaderboard {
+    max-width: 600px;
+    margin: 10% auto;
+    padding: 4rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #242424; /* Assuming this is a color from your index.css */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff; /* White text for contrast */
+}
+
+.leaderboard h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #f0f0f0; /* Light color for the heading */
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 10px;
+    border-bottom: 1px solid #444; /* Darker border for separation */
+    color: #f0f0f0; /* Light color for the text */
+}
+
+.score span {
+    flex: 1;
+    text-align: center;
+}
+
+.score span:first-child {
+    text-align: left;
+}
+
+.score span:last-child {
+    text-align: right;
+}

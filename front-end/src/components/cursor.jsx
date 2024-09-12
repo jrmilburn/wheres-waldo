@@ -5,14 +5,6 @@ function Cursor() {
   const [cursorY, setCursorY] = useState(0);
   const [deviceType, setDeviceType] = useState('');
   const [isClicking, setIsClicking] = useState(false);
-  const [buttonHovered, setButtonHovered] = useState(false);
-
-  useEffect(() => {
-    fetch(`https://localhost:3000/api/maps/slopes`)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
-  }, [isClicking])
 
   // check if it is a touch device
   const isTouchDevice = () => {
@@ -42,26 +34,12 @@ function Cursor() {
     }
   };
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (e) => {
     setIsClicking(true);
-
   };
 
   const handleMouseUp = () => {
     setIsClicking(false);
-  };
-
-  // Align custom cursor when mouse re-enters the viewport
-  const handleMouseEnter = (e) => {
-    move(e); // Sync the custom cursor with the actual mouse position
-  };
-
-  // Handle resetting the cursor when leaving the page
-  const handleMouseLeave = () => {
-    const cursorBorder = document.getElementById('cursor-border');
-    if (cursorBorder) {
-      cursorBorder.style.opacity = '0'; // Hide custom cursor when mouse leaves the page
-    }
   };
 
   useEffect(() => {
@@ -69,25 +47,14 @@ function Cursor() {
     document.addEventListener('touchmove', move);
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       document.removeEventListener('mousemove', move);
       document.removeEventListener('touchmove', move);
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseenter', handleMouseEnter);
-      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
-
-  useEffect(() => {
-    const cursorBorder = document.getElementById('cursor-border');
-    if (cursorBorder) {
-      cursorBorder.style.opacity = '1'; // Ensure custom cursor is visible when the page is entered
-    }
-  }, [cursorX, cursorY]);
 
   return (
     <div>
@@ -115,7 +82,7 @@ function Cursor() {
             width: 50px;
             height: 50px;
             background-color: transparent;
-            border: 3px solid ${buttonHovered ? 'red' : '#fff'};
+            border: 3px solid #fff;
             transform: translate(-50%, -50%);
             pointer-events: none;
             transition: all 0.2s ease-out;

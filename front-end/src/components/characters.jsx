@@ -6,21 +6,9 @@ import wizard from '../assets/wizard.jpg';
 import styles from './characters.module.css';
 
 import Character from './character';
+import { useState } from 'react';
 
-export default function Characters({ foundCharacters, onCharacterFound }) {
-
-    const characters = [
-        { image: waldo, name: 'Waldo', found: false },
-        { image: waldo2, name: 'Wena', found: false },
-        { image: waldo3, name: 'Weirdo', found: true },
-        { image: wizard, name: 'Wizard', found: false },
-    ];
-
-    const handleCharacterClick = (character) => { 
-        if (!foundCharacters.includes(character.name)) {
-            onCharacterFound(character.name);
-        }
-    }
+export default function Characters({ foundCharacters, characters }) {
 
     return (
 
@@ -29,10 +17,9 @@ export default function Characters({ foundCharacters, onCharacterFound }) {
             {characters.map((character) => (
                 <Character 
                     key={character.name} 
-                    image={character.image} 
+                    image={character.imageUrl} 
                     name={character.name} 
-                    found={foundCharacters.includes(character.name)}
-                    onClick= {() => handleCharacterClick(character)}
+                    found={foundCharacters.some((foundCharacter) => foundCharacter.name === character.name)}
                      />
             ))}
 

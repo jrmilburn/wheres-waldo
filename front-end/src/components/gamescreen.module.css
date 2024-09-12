@@ -16,7 +16,16 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    border: 2px solid red;
+    border: 4px solid red;
+    transform: translate(-50%, -50%); /* Centers the box around the click */
+    pointer-events: none; /* Box doesn't interfere with clicks */
+  }
+
+  .marker {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgb(3, 214, 3);
     transform: translate(-50%, -50%); /* Centers the box around the click */
     pointer-events: none; /* Box doesn't interfere with clicks */
   }
